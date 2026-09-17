@@ -5,11 +5,11 @@ DESCRIPCIÓN DEL PROYECTO:
 El Sistema de Reservaciones de Hotel es una aplicación desarrollada en C++ por consola diseñada para administrar la infraestructura, clientes, reservaciones y reportes financieros de un hotel de manera eficiente.  El programa permite controlar el ciclo completo de una estadía (Check-in, consulta de disponibilidad, Check-out y cobro), manteniendo la información persistente mediante archivos de texto plano. 
 
 Integrantes:
-Melvin Arnoldo Galicia Peñate 6590-26-22826
-Dulce Azucena Aguilar Díaz 6590-26-24363
-Aaron Neftalí Vásquez Mazariegos 6590-26-25372
+Melvin Arnoldo Galicia Peñate 6590-26-22826      Usuario:mgaliciap1-hub
+Dulce Azucena Aguilar Díaz 6590-26-24363         Usuario:DulceAg11
+Aaron Neftalí Vásquez Mazariegos 6590-26-25372   
 Roberto Carlos Tepeque Mayen 6590-25-27766
-Bryan Emiliano Lemus Hernández 6590-15-23643
+Bryan Emilio Lemus Hernández 6590-15-23643       Usuario:blemush1-png
 
 Responsabilidades:
 1. Melvin Galicia – Coordinador General y Arquitectura del Sistema
