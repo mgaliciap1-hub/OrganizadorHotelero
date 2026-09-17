@@ -6,9 +6,13 @@ El Sistema de Reservaciones de Hotel es una aplicación desarrollada en C++ por 
 
 Integrantes:
 Melvin Arnoldo Galicia Peñate 6590-26-22826      Usuario:mgaliciap1-hub
+
 Dulce Azucena Aguilar Díaz 6590-26-24363         Usuario:DulceAg11
+
 Aaron Neftalí Vásquez Mazariegos 6590-26-25372   
+
 Roberto Carlos Tepeque Mayen 6590-25-27766
+
 Bryan Emilio Lemus Hernández 6590-15-23643       Usuario:blemush1-png
 
 Responsabilidades:
