@@ -1,3 +1,4 @@
+// Módulo: Reservaciones  Última actualización: 10/10/2026 por Bryan Lemus
 #include <iostream>
 #include "reservaciones.h"
 
