@@ -2,7 +2,7 @@
 #define ESTRUCTURAS_H
 #include <string>
 using namespace std;
-
+//prueba 
 const int MAX_HABITACIONES = 100;
 const int MAX_HUESPEDES = 100;
 const int MAX_RESERVAS = 100;
