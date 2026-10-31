@@ -52,34 +52,12 @@ int main() {
             case 4:
                 consultarHuespedes();
                 break;
-
-            case 5: {
-                Reservacion nueva;
-                cout << "\n--- REGISTRO DE RESERVACION ---" << endl;
-                cout << "Ingrese ID de la Reserva: ";
-                cin >> nueva.id;
-                cout << "Ingrese Dias de estancia: ";
-                cin >> nueva.dias;
-                
-                if (crearReservacion(reservaciones, totalReservas, habitaciones, totalHabitaciones, huespedes, totalHuespedes, nueva)) {
-                    cout << "[OK] Reservacion registrada con exito." << endl;
-                } else {
-                    cout << "[ERROR] No se pudo realizar el registro." << endl;
-                }
+            case 5: 
+                reservacionnueva();
                 break;
-            }
-
-            case 6: {
-                int idBusqueda;
-                cout << "\n--- PROCESAR CHECK-OUT ---" << endl;
-                cout << "Ingrese ID de Reservacion a cerrar: ";
-                cin >> idBusqueda;
-                
-                float total = realizarCheckOut(reservaciones, totalReservas, habitaciones, totalHabitaciones, idBusqueda);
-                cout << "Monto Total a Pagar: Q " << total << endl;
+            case 6: 
+                procesarCheckout();
                 break;
-            }
-
             case 7:
                 mostrarMapaHotel();
                 break;
