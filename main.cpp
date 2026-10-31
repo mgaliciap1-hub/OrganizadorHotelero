@@ -2,10 +2,14 @@
 #include <fstream>
 #include <sstream>
 #include "estructuras.h"
+#include "habitaciones.h"
+#include "huespedes.h"
 #include "persistencia.h"
+#include "reservaciones.h"
 
 using namespace std;
 
+// variables globales del sistema
 Habitacion habitaciones[MAX_HABITACIONES];
 int totalHabitaciones = 0;
 Huesped huespedes[MAX_HUESPEDES];
@@ -14,43 +18,84 @@ Reservacion reservaciones[MAX_RESERVAS];
 int totalReservas = 0;
 int mapaHotel[PISOS][HABS_POR_PISO];
 
-void actualizarMatriz() {
-    for (int p = 0; p < PISOS; p++)
-        for (int h = 0; h < HABS_POR_PISO; h++)
-            mapaHotel[p][h] = 0;
+int main() {
+    cargarDatos();
+    int opcion = 0;
 
-    for (int i = 0; i < totalHabitaciones; i++) {
-        int piso = (habitaciones[i].numero / 100) - 1;
-        int col = (habitaciones[i].numero % 100) - 1;
-        if (piso >= 0 && piso < PISOS && col >= 0 && col < HABS_POR_PISO) {
-            mapaHotel[piso][col] = (habitaciones[i].estado == 1) ? 1 : 2;
+    do {
+        cout << "\n=========================================" << endl;
+        cout << "    SISTEMA DE RESERVACIONES DE HOTEL     " << endl;
+        cout << "=========================================" << endl;
+        cout << "1. Registrar Habitacion" << endl;
+        cout << "2. Consultar Habitaciones" << endl;
+        cout << "3. Registrar Huesped" << endl;
+        cout << "4. Consultar Huespedes" << endl;
+        cout << "5. Registrar Reservacion (Check-In)" << endl;
+        cout << "6. Procesar Check-Out" << endl;
+        cout << "7. Ver Mapa del Hotel" << endl;
+        cout << "8. Generar Reportes" << endl;
+        cout << "9. Guardar Datos" << endl;
+        cout << "10. Salir" << endl;
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                registrarHabitacion();
+                break;
+            case 2:
+                consultarHabitaciones();
+                break;
+            case 3:
+                registrarHuesped();
+                break;
+            case 4:
+                consultarHuespedes();
+                break;
+
+            case 5: {
+                Reservacion nueva;
+                cout << "\n--- REGISTRO DE RESERVACION ---" << endl;
+                cout << "Ingrese ID de la Reserva: ";
+                cin >> nueva.id;
+                cout << "Ingrese Dias de estancia: ";
+                cin >> nueva.dias;
+                
+                if (crearReservacion(reservaciones, totalReservas, habitaciones, totalHabitaciones, huespedes, totalHuespedes, nueva)) {
+                    cout << "[OK] Reservacion registrada con exito." << endl;
+                } else {
+                    cout << "[ERROR] No se pudo realizar el registro." << endl;
+                }
+                break;
+            }
+
+            case 6: {
+                int idBusqueda;
+                cout << "\n--- PROCESAR CHECK-OUT ---" << endl;
+                cout << "Ingrese ID de Reservacion a cerrar: ";
+                cin >> idBusqueda;
+                
+                float total = realizarCheckOut(reservaciones, totalReservas, habitaciones, totalHabitaciones, idBusqueda);
+                cout << "Monto Total a Pagar: Q " << total << endl;
+                break;
+            }
+
+            case 7:
+                mostrarMapaHotel();
+                break;
+            case 8:
+                generarReporte();
+                break;
+            case 9:
+                guardarDatos();
+                break;
+            case 10:
+                cout << "Saliendo del sistema..." << endl;
+                break;
+            default:
+                cout << "[X] Opcion invalida. Intente de nuevo." << endl;
         }
-    }
-}
+    } while (opcion != 10);
 
-void mostrarMapaHotel() {
-    actualizarMatriz();
-    cout << "\n-- MAPA DEL HOTEL --\n[0=Vacio | 1=Ocupado | 2=Disponible]\n" << endl;
-    for (int p = PISOS - 1; p >= 0; p--) {
-        cout << "Piso " << (p + 1) << ": ";
-        for (int h = 0; h < HABS_POR_PISO; h++) cout << "[" << mapaHotel[p][h] << "] ";
-        cout << endl;
-    }
-}
-
-void generarReporte() {
-    cout << "\n-- REPORTES --" << endl;
-    cout << "Habitaciones totales: " << totalHabitaciones << endl;
-    cout << "Reservas activas: " << totalReservas << endl;
-}
-
-void guardarDatos() {
-    ofstream fHab("habitaciones.txt");
-    for (int i = 0; i < totalHabitaciones; i++)
-        fHab << habitaciones[i].numero << "," << habitaciones[i].tipo << "," << habitaciones[i].tarifa << "," << habitaciones[i].estado << "\n";
-    fHab.close();
-}
-
-void cargarDatos() {
-    actualizarMatriz();
+    return 0;
 }
